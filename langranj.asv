@@ -1,8 +1,21 @@
 syms x;
+%x0 = -1;
+%x1 = 0;
+%x2 = 1;
+%x3 = 2;
+%y0 = -1;
+%y1 = 5;
+%y2 = 7;
+%y3 = 11;
+%k0 = (((x-x1)*(x-x2)*(x-x3))/((x0-x1)*(x0-x2)*(x0-x3)))*y0;
+%k1 = (((x-x0)*(x-x2)*(x-x3))/((x1-x0)*(x1-x2)*(x1-x3)))*y1;
+%k2 = (((x-x0)*(x-x1)*(x-x3))/((x2-x0)*(x2-x1)*(x2-x3)))*y2;
+%k3 = (((x-x0)*(x-x1)*(x-x2))/((x3-x0)*(x3-x1)*(x3-x2)))*y3;
+
+syms x;
 xx = [-1 0 1 2];
 yy = [-1 5 7 11];
 s = 0;
-% Вычисление интерполяционного многочлена методом Лагранжа
 for i=1:1:length(xx)
    a = 1;
    b = 1;
@@ -15,7 +28,7 @@ for i=1:1:length(xx)
    s = s + yy(i)*a/b;
 end
 f = simplify(s)
-% Вычисление коэффициентов многочлена каноническим методом
+
 A1 = zeros(length(xx));
 for i=1:1:length(xx)
     for j=1:1:length(xx)
@@ -24,8 +37,13 @@ for i=1:1:length(xx)
 end
 disp(A1^-1*yy')
 
+%f = simplify(k0+k1+k2+k3)
 ezplot(f);
-% Вычисление биномиальных коэффициентов методом разделенных разностей
+c0 = yy(1);
+c1 = (yy(2)-c0)/(xx(2)-xx(1));
+c2 = (yy(3)-c0-c1*(xx(3)-xx(1)))/((xx(3)-xx(1))*(xx(3)-xx(2)));
+c3 = 1;
+c = [c0 c1 c2 c3];
 cc = zeros(length(xx));
 for j=1:1:length(xx)
     for i=1:1:length(xx) - j + 1
@@ -39,11 +57,9 @@ for j=1:1:length(xx)
     end
 end
 disp(cc);
-% Создание вектора биномиальных коэффициентов
 for i=1:1:length(cc)
     c(i) = cc(1,i);
 end
-% Вычисление интерполяционного многочлена методом Ньютона
 ff = 0;
 for i=1:1:length(c)
    if i > 1
@@ -56,4 +72,6 @@ for i=1:1:length(c)
    end
    ff = ff + a;
 end
-f2 = simplify(ff)
+fsimplify(ff)
+%f2 = simplify(c0+c1*(x-x0)+c2*(x-x0)*(x-x1)+c3*(x-x0)*(x-x1)*(x-x2))
+%ezplot(f2);
