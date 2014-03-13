@@ -15,6 +15,8 @@ for i=1:1:length(xx)
    s = s + yy(i)*a/b;
 end
 f = simplify(s)
+subplot(1,2,1);
+ezplot(f);
 % Вычисление коэффициентов многочлена каноническим методом
 A1 = zeros(length(xx));
 for i=1:1:length(xx)
@@ -23,8 +25,6 @@ for i=1:1:length(xx)
     end
 end
 disp(A1^-1*yy')
-
-ezplot(f);
 % Вычисление биномиальных коэффициентов методом разделенных разностей
 cc = zeros(length(xx));
 for j=1:1:length(xx)
@@ -57,3 +57,5 @@ for i=1:1:length(c)
    ff = ff + a;
 end
 f2 = simplify(ff)
+subplot(1,2,2);
+ezplot(f2);
