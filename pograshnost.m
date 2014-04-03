@@ -1,0 +1,33 @@
+clear all;
+t = 16;
+syms x;
+% равномерно e^-x
+ex = linspace(0,1,t);
+yy = exp(-ex);
+p = lagrange(ex, yy);
+f = exp(-x);
+subplot(2,2,1);
+ezplot(p,[0 1]);
+hold on;
+h = ezplot(f,[0 1]);
+set(h,'Color','r','LineStyle','--');
+subplot(2,2,3);
+a = abs(p - f);
+ezplot(a);
+axis([0 1 0 0.5]);
+title(' ');
+% равномерно рунге
+xx = linspace(-1,1,t);
+yy = 1./(1+25.*xx.^2);
+p = lagrange(xx, yy);
+f = 1/(1+25*x^2);
+subplot(2,2,2);
+ezplot(p,[-1 1]);
+hold on;
+j = ezplot(f,[-1 1]);
+set(j,'Color','r','LineStyle','--');
+subplot(2,2,4);
+a = abs(p - f);
+ezplot(a);
+axis([-1 1 0 1]);
+title(' ');
