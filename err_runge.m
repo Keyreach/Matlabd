@@ -3,12 +3,12 @@ syms x;
 
 figure();
 
-for t = 3:2:21
-	set(gcf, 'name', strcat(num2str(t),' точек'));
+for t = 2:2:20
+	set(gcf, 'name', strcat(num2str(t+1),' точек'));
 
 	% равномерно рунге
 
-	xx = linspace(-1,1,t);
+	xx = linspace(-1,1,t+1);
 	yy = 1./(1+25.*xx.^2);
 	subplot(2,2,1);
 	ezplot(lagrange(xx, yy),[-1 1]);

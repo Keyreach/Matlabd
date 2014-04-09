@@ -3,12 +3,12 @@ syms x;
 
 figure();
 
-for t = 3:2:21
-	set(gcf, 'name', strcat(num2str(t),' точек')); 
+for t = 2:2:20
+	set(gcf, 'name', strcat(num2str(t+1),' точек')); 
 
 	% равномерно экспонента
 
-	ex = linspace(0,1,t);
+	ex = linspace(0,1,t+1);
 	yy = exp(-ex);
 	subplot(2,2,1);
 	ezplot(lagrange(ex, yy),[0 1]);
