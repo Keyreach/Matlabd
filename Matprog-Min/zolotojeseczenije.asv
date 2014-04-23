@@ -1,0 +1,26 @@
+clc;
+clear all;
+syms x;
+f = (x+1)^2+1;
+eps = 0.01;
+a = -5;
+b = 5;
+t = 0.61803;
+l = b - a;
+x2 = l*t+a;
+x1 = l - x2;
+while l>eps
+    f1 = subs(f,x,x1);
+    f2 = subs(f,x,x2);
+    if f1 > f2
+        a = x1;
+    else
+        b = x2;
+    end
+end
+disp(a);
+disp(b);
+ezplot(f);
+hold on;
+stem(a, subs(f,x,a));
+stem(b, subs(f,x,b));
