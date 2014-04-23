@@ -2,8 +2,11 @@ clear all;
 syms x;
 ff = exp(x-2)+(x-2)^2;
 fd = diff(ff);
-xs = [1 1.5 2 2.5];
+% xs = [1 1.5 2 2.5];
+xs = [1 1.8 1.9 2.4];
 ys = subs(ff,x,xs);
+stem(xs,ys);
+hold on;
 yd = subs(fd,x,xs);
 n = length(xs);
 for i=2:1:n

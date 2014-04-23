@@ -1,0 +1,48 @@
+function y = svenn(f, a, b, d, x0)
+k = 1;
+xx(1) = x0;
+f1 = subs(f,x,xx(1)-d);
+f2 = subs(f,x,xx(1));
+f3 = subs(f,x,xx(1)+d);
+if (f1>=f2)&&(f2>=f3)
+    ch = 1;
+    h = d;
+    a = xx(1);
+    xx(2) = xx(1) + h;
+    k = 2;
+elseif (f1<=f2)&&(f2<=f3)
+    ch = 2;
+    h = -d;
+    b = xx(1);
+    xx(2) = xx(1) - h;
+elseif (f1>=f2)&&(f2<=f3)
+    ch = 3;
+    a = xx(1) - d;
+    b = xx(1) + d;
+elseif (f1<=f2)&&(f2>=f3)
+    ch = 4;
+    disp('NOPE');
+end
+xx(k+1) = xx(k) + h*2^k;
+while subs(f,x,xx(k+1)) <= subs(f,x,xx(k))
+    if h > 0
+        a = xx(k);
+        k = k + 1;
+    elseif h < 0
+        b = xx(k);
+        k = k + 1;
+    end
+    if k > 30
+        disp('TOO MANY CYCLES. SOMETHING WENT WRONG.');
+    break;
+    end
+    xx(k+1) = xx(k) + h*2^k;
+end
+if subs(f,x,xx(k+1)) >= subs(f,x,xx(k))
+    if h > 0
+        b = xx(k+1);
+    elseif h < 0
+        a = xx(k+1);
+    end
+end
+y = [a b]

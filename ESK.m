@@ -39,7 +39,7 @@ for i=1:1:n-1
     b = xs(i+1);
     xx = a:0.005:b;
     f1 = subs(S(i+1),x,xx);
-    plot(xx,f1,'Color','g');
+    plot(xx,f1,'Color','k');
     hold on;
 end
 j = ezplot(ff,[xs(1) xs(n)]);
