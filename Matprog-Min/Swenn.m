@@ -26,7 +26,7 @@ elseif (f1>=f2)&&(f2<=f3)
     b = xx(1) + d;
 elseif (f1<=f2)&&(f2>=f3)
     ch = 4;
-    disp('NOPE');
+    disp('NO MIN');
 end
 xx(k+1) = xx(k) + h*2^k;
 while subs(f,x,xx(k+1)) <= subs(f,x,xx(k))
@@ -38,7 +38,7 @@ while subs(f,x,xx(k+1)) <= subs(f,x,xx(k))
         k = k + 1;
     end
     if k > 30
-        disp('TOO MANY CYCLES. SOMETHING WENT WRONG.');
+        disp('TOO MANY ITERATIONS. SOMETHING WENT WRONG.');
     break;
     end
     xx(k+1) = xx(k) + h*2^k;
